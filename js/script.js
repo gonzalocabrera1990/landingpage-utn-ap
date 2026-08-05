@@ -148,8 +148,10 @@ function enviarConsulta () {
     card.style.display = "none"
 
     element.innerHTML = `
+    <div class="tarjeta-container" >
     <i class="bi bi-check-circle-fill consulta-exitosa"></i>
     <p>Nos pondremos en contacto contigo.</p>
+    </div>
     `
         
 }
@@ -230,28 +232,87 @@ const posibilidades = ["Patchy rain possible", "Clear", "Partly cloudy", "Cloudy
 var dias = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
 // var icons = ['brightness-high', 'cloud-lightning-rain', 'cloud-rain', 'cloud-rain-heavy', 'clouds', 'cloud-sun', 'cloud-moon', 'moon', 'wind', 'cloud-snow'];
 
-const icons =  {
-    "Patchy rain possible": "cloud-rain",
-    "Clear": "brightness-high",
-    "Partly cloudy": "cloud-sun",
-    "Cloudy": "clouds",
-    "Mist": "cloud-snow",
-    "Overcast": "clouds",
-    "Sunny": "brightness-high",
-    "Light rain shower": "",
-    "Heavy rain": "cloud-rain-heavy",
-    "Moderate rain": "cloud-rain",
-    "Fog": "cloud-snow",
-    "Moderate or heavy rain shower": "",
-    "Patchy light drizzle": "",
-    "Light rain shower": "",
-    "Heavy snow": "snow",
-    "Patchy heavy snow":"snow",
-    "Light sleet": "cloud-snow",
-    "Freezing fog":"cloud-snow",
-    "Light snow": "snow",
-    "Patchy moderate snow": "snow",
-    "Moderate or heavy snow showers": "cloud-rain-heavy"
+const icons = {
+"Sunny": "brightness-high",
+"Clear": "brightness-high",
+"Partly cloudy": "cloud-sun",
+"Partly Cloudy": "cloud-sun",
+"Partly cloudy night": "cloud-moon",
+"Partly Cloudy night": "cloud-moon",
+"Cloudy": "clouds",
+"Cloudy": "clouds",
+"Overcast": "clouds",
+"Overcast night": "cloud-moon",
+"Haze": "cloud-haze",
+"Dust haze": "cloud-haze2",
+"Blowing dust": "cloud-haze2",
+"Dust storm": "cloud-haze2",
+"Sandstorm": "cloud-haze2",
+"Severe sandstorm": "cloud-haze2",
+"Mist": "cloud-snow",
+"Smoke": "cloud-fog2",
+"Smoky haze": "cloud-haze",
+"Smog": "cloud-fog2",
+"Severe smog": "cloud-fog2",
+"Saharan dust": "cloud-haze",
+"Dust": "cloud-haze",
+"Patchy rain nearby": "cloud-drizzle",
+"Patchy rain nearby night": "cloud-drizzle",
+"Patchy rain possible": "cloud-drizzle",
+"Patchy rain possible night": "cloud-drizzle",
+"Patchy rain possible": "cloud-rain",
+"Patchy snow possible": "cloud-snow",
+"Patchy sleet possible": "cloud-sleet",
+"Patchy freezing drizzle possible": "cloud-drizzle",
+"Thundery outbreaks": "cloud-lightning",
+"Thundery outbreaks possible": "cloud-lightning",
+"Thundery outbreaks in nearby": "cloud-lightning",
+"Thundery outbreaks possible": "cloud-lightning",
+"Blowing snow": "wind",
+"Blizzard": "cloud-snow",
+"Fog": "cloud-snow",
+"Freezing fog": "cloud-snow",
+"Patchy light drizzle": "cloud-drizzle",
+"Light drizzle": "cloud-drizzle",
+"Freezing drizzle": "cloud-drizzle",
+"Heavy freezing drizzle": "cloud-drizzle",
+"Patchy light rain": "cloud-drizzle",
+"Light rain": "cloud-drizzle",
+"Moderate rain at times": "cloud-drizzle",
+"Moderate rain": "cloud-rain",
+"Heavy rain at times": "cloud-rain-heavy",
+"Heavy rain": "cloud-rain-heavy",
+"Light freezing rain": "cloud-drizzle",
+"Moderate or heavy freezing rain": "cloud-rain-heavy",
+"Light sleet": "cloud-sleet",
+"Moderate or heavy sleet": "cloud-sleet",
+"Patchy light snow": "snow",
+"Light snow": "snow",
+"Patchy moderate snow": "snow",
+"Moderate snow": "cloud-snow",
+"Patchy heavy snow": "snow",
+"Heavy snow": "snow",
+"Ice pellets": "snow3",
+"Light rain shower": "cloud-rain",
+"Moderate or heavy rain shower": "cloud-rain",
+"Torrential rain shower": "cloud-lightning-rain",
+"Light sleet showers": "cloud-sleet",
+"Moderate or heavy sleet showers": "cloud-sleet",
+"Light snow showers": "cloud-snow",
+"Moderate or heavy snow showers": "cloud-rain-heavy",
+"Light showers of ice pellets": "cloud-snow",
+"Moderate or heavy showers of ice pellets": "cloud-snow",
+"Patchy light rain with thunder": "cloud-lightning-rain",
+"Patchy light rain in area with thunder night": "cloud-lightning-rain",
+"Moderate or heavy rain with thunder": "cloud-lightning-rain",
+"Patchy light snow with thunder": "snow2",
+"Moderate or heavy snow with thunder": "snow2",
+"Clear night": "moon",
+"Clear Night": "moon",
+"Partly cloudy night": "cloud-moon",
+"Partly Cloudy Night": "cloud-moon",
+"Sunny night": "moon",
+"Sunny Night": "moon",
 }
 
 const forecast = (api) => {
@@ -263,6 +324,8 @@ const forecast = (api) => {
             let condition = days[dayIn].day.condition.text
             let date = new Date(days[dayIn].date)
             let dia = date.getUTCDay()
+            console.log(condition);
+            
             let getIcon = icons[condition]
             forecastElement.innerHTML += `
             <div class="item" >
